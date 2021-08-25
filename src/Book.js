@@ -4,11 +4,6 @@ class Book extends React.Component{
     //note that there is no need to use state for this component because all
     //data are passed and used directly through the props (from the books component)
     
-    //getAuthors: if there is more than 1 author for a book, this function
-    //returns all authors followed by ',' except the last author
-    getAuthors = () => `${this.props.book.authors.map( au => 
-                                `${au}, `)}`.slice(0, `${this.props.book.authors.map( au => 
-                                    `${au}, `)}`.lastIndexOf(","));
     handleChange = (selected) => {
         //get the changed book:
         let b= this.props.book;
@@ -19,8 +14,7 @@ class Book extends React.Component{
             this.props.addBookFromSearch(b)
         }
         //else if changing the book shelf happend in the library books 
-        else 
-        this.props.moveBook(b);
+        else this.props.moveBook(b);
     }
         
     render(){
@@ -36,7 +30,10 @@ class Book extends React.Component{
                                 
                                 <p style = {{textAlign:"center"}}>N/A</p>
                                 :
-                                <img src = {`${this.props.book.imageLinks.thumbnail}`} style ={{width:'100%', height:'100%'}} />
+                                <img src = {`${this.props.book.imageLinks.thumbnail}`} 
+                                style ={{width:'100%', height:'100%'}} 
+                                alt={"book"}
+                                />
                                 }
                             </div>
                             <div className="book-shelf-changer">
@@ -56,9 +53,8 @@ class Book extends React.Component{
                           <div className="book-authors">{
                               //if the book doesn't have authors in the server:
                              this.props.book.authors === undefined ? "no authors"
-                             : //if there is authors, check if there is more than one:
-                            (this.props.book.authors.length === 1 ? 
-                            this.props.book.authors[0] : this.getAuthors()) //get all authors for this book
+                             : //if there is authors, get them as one string:
+                            this.props.book.authors.join(', ') 
                         }
                     </div>
                 </div>

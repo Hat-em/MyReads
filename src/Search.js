@@ -8,8 +8,11 @@ class Search extends React.Component{
         notFound:"'Android', 'Art', 'Artificial Intelligence', 'Astronomy', 'Austen', 'Baseball', 'Basketball', 'Bhagat', 'Biography', 'Brief', 'Business', 'Camus', 'Cervantes', 'Christie', 'Classics', 'Comics', 'Cook', 'Cricket', 'Cycling', 'Desai', 'Design', 'Development', 'Digital Marketing', 'Drama', 'Drawing', 'Dumas', 'Education', 'Everything', 'Fantasy', 'Film', 'Finance', 'First', 'Fitness', 'Football', 'Future', 'Games', 'Gandhi', 'Homer', 'Horror', 'Hugo', 'Ibsen', 'Journey', 'Kafka', 'King', 'Lahiri', 'Larsson', 'Learn', 'Literary Fiction', 'Make', 'Manage', 'Marquez', 'Money', 'Mystery', 'Negotiate', 'Painting', 'Philosophy', 'Photography', 'Poetry', 'Production', 'Programming', 'React', 'Redux', 'River', 'Robotics', 'Rowling', 'Satire', 'Science Fiction', 'Shakespeare', 'Singh', 'Swimming', 'Tale', 'Thrun', 'Time', 'Tolstoy', 'Travel', 'Ultimate', 'Virtual Reality', 'Web Development', 'iOS'"
     }
     execute = async (eve) => {
-        let found = await search(eve.target.value);
-        if(found !== undefined && found.length > 0){
+      let found = []
+      if(eve.target.value.length>0){
+        found = await search(eve.target.value);
+      }
+      if(found !== undefined && found.length > 0){
             //if a book from the search exists in our library, return the existing
             //version (to display that it's in our shelves):
             found = found.map(
@@ -24,6 +27,9 @@ class Search extends React.Component{
                 }
             )
             this.setState({result:found})
+        }
+        else{
+          this.setState({result:[]})
         }
     }
     render(){
