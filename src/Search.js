@@ -64,7 +64,7 @@ class Search extends React.Component{
                                     cameFromSearch={true}
                                     />) 
                 :
-                 <p style={{fontSize:"0.9em"}}>categories:<br/>{this.state.notFound}</p>
+                 <p style={{fontSize:"0.9em", color:"white"}}>categories:<br/>{this.state.notFound}</p>
                 }
               </ol>
             </div>
